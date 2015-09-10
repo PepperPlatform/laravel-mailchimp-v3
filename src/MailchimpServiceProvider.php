@@ -14,9 +14,7 @@ class MailchimpServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/config/mailchimp.php' => config_path('mailchimp.php')
-        ]);
+        $this->package('carlosdanielmou/laravel-mailchimp-v3');
     }
 
     /**
@@ -26,10 +24,18 @@ class MailchimpServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('Mailchimp', function ($app) {
-            $config = $app['config']['mailchimp'];
-
-            return new Mailchimp($config['apikey']);
+        $this->app->singleton('mailchimp',  function() {
+            return new Mailchimp(Config::get('mailchimp::apikey'));
         });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return array('mailchimp');
     }
 }
