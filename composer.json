@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mailchimp": "src/"
+            "Mailchimp\\": "src/"
         }
     },
     "extra": {
