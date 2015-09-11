@@ -14,8 +14,8 @@
         "illuminate/support": "4.*|5.0.*"
     },
     "autoload": {
-        "psr-4": {
-            "Mailchimp\\": "src/"
+        "psr-0": {
+            "Carlosdanielmou\\laravel-mailchimp-v3\\": "src/"
         }
     },
     "extra": {

@@ -3,9 +3,18 @@
 namespace Mailchimp;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Container\Container;
 
 class MailchimpServiceProvider extends ServiceProvider
 {
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
     /**
      * Register paths to be published by the publish command.
@@ -14,7 +23,7 @@ class MailchimpServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('carlosdanielmou/laravel-mailchimp-v3');
+        $this->package('carlosdanielmou/laravel-mailchimp-v3', null, __DIR__);
     }
 
     /**
@@ -24,8 +33,8 @@ class MailchimpServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('mailchimp',  function() {
-            return new Mailchimp(Config::get('mailchimp::apikey'));
+        $this->app->bind('mailchimp',  function() {
+            return new Mailchimp(\Config::get('laravel-mailchimp-v3::apikey'));
         });
     }
 
@@ -36,6 +45,6 @@ class MailchimpServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('mailchimp');
+        return array();
     }
 }
