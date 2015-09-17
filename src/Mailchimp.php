@@ -150,7 +150,7 @@ class Mailchimp
             $response = $this->client->{$method}($this->endpoint . $resource, $options);
 
             $collection = new Collection(
-                json_decode($response->getBody())
+                json_decode($response->getBody(), true)
             );
 
             if ($collection->count() == 1) {
