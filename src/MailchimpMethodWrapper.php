@@ -11,9 +11,20 @@ namespace Mailchimp;
 
 class MailchimpMethodWrapper extends Mailchimp {
 
+	/**
+	 *
+	 * Status 'pending' means that the user will get a confirmation email for a subscription
+	 * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#create-post_lists_list_id_members
+	 *
+	 * @param $listId
+	 * @param $emailAddress
+	 * @param string $status    subscribed, unsubscribed, cleaned, pending
+	 * @param string $emailType
+	 * @return \Illuminate\Support\Collection
+	 */
 	public function listSubscribe($listId,
 	                              $emailAddress,
-	                              $status = 'subscribed',
+	                              $status = 'pending',
 	                              $emailType = 'html') {
 
 		$params = array();
