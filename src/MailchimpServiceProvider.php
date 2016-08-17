@@ -5,6 +5,7 @@ namespace Mailchimp;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Container\Container;
+use Config;
 
 class MailchimpServiceProvider extends ServiceProvider
 {
@@ -34,7 +35,7 @@ class MailchimpServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('mailchimp',  function() {
-            return new Mailchimp(\Config::get('laravel-mailchimp-v3::apikey'));
+            return new MailchimpMethodWrapper(Config::get('laravel-mailchimp-v3::apikey'));
         });
     }
 
