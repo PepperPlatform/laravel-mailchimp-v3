@@ -14,16 +14,14 @@ class MailchimpMethodWrapper extends Mailchimp {
 	public function listSubscribe($listId,
 	                              $emailAddress,
 	                              $status = 'subscribed',
-	                              $mergeFields = null,
 	                              $emailType = 'html') {
 
 		$params = array();
 		$params["email_address"] = $emailAddress;
 		$params["status"] = $status;
-		$params["merge_fields"] = $mergeFields;
 		$params["email_type"] = $emailType;
 
-		$this->post('/lists/' . $listId . '/members/', $params);
+		return $this->post('/lists/' . $listId . '/members/', $params);
 	}
 
 	public function listUnsubscribe($listId, $emailAddress) {
